@@ -15,31 +15,49 @@
     }
 
     rect.fence {
-
-
-    	-webkit-animation: walk 10s linear infinite;
-
+    	-webkit-animation: fencewalk 5s linear 5s;
+    	-webkit-animation-delay: 5s;
     }
 
-    @-webkit-keyframes walk {
+    @-webkit-keyframes fencewalk {
 
-    	from {fill :silver; transform:translateX(0px);}
+    	from {fill :silver; transform: translateX(0px);}
     	/*50% {fill: lightgray;}*/
     	to {fill: silver; transform: translateX(-530px);}
     }
 
 
-    g {
+    g.dog {
+    	
 
-    	-webkit-animation: bounce 1s linear infinite;
-
+    	-webkit-animation: bounce 0.5s linear infinite;
+    	-webkit-animation-delay: 0s;
     }
 
     @-webkit-keyframes bounce {
-
     	from {transform:translateY(0px);}
     	50% {transform:translateY(10px);}
     	to { transform:translateY(0px);}
+
+    }
+
+
+    g.dog_container {
+
+    	-webkit-animation: walkin 5s linear 10s, walkout 5s linear 10s;
+    	-webkit-animation-delay: 0s, 10s;
+    } 
+
+    @-webkit-keyframes walkin {
+    	from {transform:translate(-275px,0px);}
+    	/*50% {transform:translateY(10px);}*/
+    	to { transform:translate(0px,0px);}
+    }
+
+    @-webkit-keyframes walkout {
+    	from {transform:translate(0px,0px);}
+    	/*50% {transform:translateY(10px);}*/
+    	to { transform:translate(275px,0px);}
     }
 
     </style>
@@ -53,7 +71,7 @@
   	var w = 500;
   	var h = 300;
 
-  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   	
   	var svg = d3.select("body")
@@ -74,7 +92,7 @@
 					   .attr("y", 75)
 					   .attr("width", 30)
 					   .attr("height", h - 75)
-					   .attr("fill","red");
+					   .attr("fill","silver");
 
 	var fence_frame_top = svg.append("rect")
   						 .attr("x",0)
@@ -90,7 +108,12 @@
   						 .attr("height",5)
   						 .attr("fill","black");
 
-	var dog = svg.append("g");
+    var dog_container = svg.append("g")
+    					   .attr("class", "dog_container");
+
+	var dog = dog_container.append("g")
+				 .attr("class", "dog")
+				 .attr("transform", "translate(-275,0) scale(1,1)");
 					   
 
   	var head = dog.append("circle")
@@ -207,23 +230,6 @@
     			  .attr("fill","black");
 
 
-
-  	//circleBounce();
-  					
-
-  	function circleBounce() {
-  		console.log("runningCircleBounce");
-
-  		dog.transition()
-  			  .ease("in")
-			  .duration(350)
-			  .attr("cy", h - 110)
-			  .transition()
-			  //.duration(250)
-			  //.delay(10)
-			  .attr("cy", h - 120)  
-			  .each("end", circleBounce);
-  		}
 
 
 
