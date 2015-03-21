@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Testing SVG as Animation</title>
+    <script type="text/javascript" src="d3/d3.js"></script>
+
+    <style>
+    svg {
+
+    	border-color:black;
+    	border-width:10px;
+    	border-style:solid;
+
+    }
+
+    rect.fence {
+
+
+    	-webkit-animation: walk 10s linear infinite;
+
+    }
+
+    @-webkit-keyframes walk {
+
+    	from {fill :silver; transform:translateX(0px);}
+    	/*50% {fill: lightgray;}*/
+    	to {fill: silver; transform: translateX(-530px);}
+    }
+
+
+    g {
+
+    	-webkit-animation: bounce 1s linear infinite;
+
+    }
+
+    @-webkit-keyframes bounce {
+
+    	from {transform:translateY(0px);}
+    	50% {transform:translateY(10px);}
+    	to { transform:translateY(0px);}
+    }
+
+    </style>
+
+
+</head>
+
+<body>
+
+  <script>
+  	var w = 500;
+  	var h = 300;
+
+  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+
+  	
+  	var svg = d3.select("body")
+  				.append("svg")
+  				.attr("width", w)
+  				.attr("height", h);
+
+
+
+  	var rectangles = svg.selectAll("rect")
+					   .data(dataset)
+					   .enter()
+					   .append("rect")
+					   .attr("class","fence")
+					   .attr("x", function(d, i) {
+						    return i * 35;  //Bar width of 20 plus 1 for padding
+						})
+					   .attr("y", 75)
+					   .attr("width", 30)
+					   .attr("height", h - 75)
+					   .attr("fill","red");
+
+	var fence_frame_top = svg.append("rect")
+  						 .attr("x",0)
+  						 .attr("y",100)
+  						 .attr("width",500)
+  						 .attr("height",5)
+  						 .attr("fill","black");
+
+  	var fence_frame_bottom = svg.append("rect")
+  						 .attr("x",0)
+  						 .attr("y",h-20)
+  						 .attr("width",500)
+  						 .attr("height",5)
+  						 .attr("fill","black");
+
+	var dog = svg.append("g");
+					   
+
+  	var head = dog.append("circle")
+  					.attr("cx", 250)
+  					.attr("cy", h - 120)
+  					.attr("r", 20)
+  					.attr("fill","yellow");
+
+    var snout = dog.append("ellipse")
+    			  .attr("cx",258)
+    			  .attr("cy", h-115)
+    			  .attr("rx", 20)
+    			  .attr("ry",14)
+    			  .attr("fill","yellow");
+
+    var nose = dog.append("circle")
+    			  .attr("cx",277)
+    			  .attr("cy", h-122)
+    			  .attr("r",3)
+    			  .attr("fill","black");
+
+    var eye = dog.append("circle")
+    			  .attr("cx",262)
+    			  .attr("cy", h-124)
+    			  .attr("r",3)
+    			  .attr("fill","black");
+
+  	var ear = dog.append("ellipse")
+  				 .attr("cx", 240)
+  				 .attr("cy", h-115)
+  				 .attr("rx", 8)
+  				 .attr("ry", 12)
+  				 .attr("fill", "orange");
+
+  	var body = dog.append("rect")
+  				  .attr("x",230)
+  				  .attr("y",h-100)
+  				  .attr("width",40)
+  				  .attr("height",100)
+  				  .attr("fill","darkblue");
+
+    var briefcase_handle = dog.append("rect")
+  					   .attr("x",235)
+  					   .attr("y",h-35)
+  					   .attr("width",25)
+  					   .attr("height",4)
+  					   .attr("fill","brown");
+
+  	var briefcase_handle_left = dog.append("rect")
+  					   .attr("x",235)
+  					   .attr("y",h-35)
+  					   .attr("width",4)
+  					   .attr("height",10)
+  					   .attr("fill","brown");
+
+  	var briefcase_handle_right = dog.append("rect")
+  					   .attr("x",258)
+  					   .attr("y",h-35)
+  					   .attr("width",4)
+  					   .attr("height",10)
+  					   .attr("fill","brown");
+
+    var briefcase = dog.append("rect")
+  					   .attr("x",225)
+  					   .attr("y",h-25)
+  					   .attr("width",45)
+  					   .attr("height",23)
+  					   .attr("fill","brown");
+
+  	var briefcase_decoration_left = dog.append("rect")
+  										.attr("x",232)
+  										.attr("y",h-25)
+  										.attr("width",6)
+  										.attr("height",23)
+  										.attr("fill","red");
+
+   	var briefcase_decoration_right = dog.append("rect")
+  										.attr("x",259)
+  										.attr("y",h-25)
+  										.attr("width",6)
+  										.attr("height",23)
+  										.attr("fill","red");
+
+  	var hand = dog.append("circle")
+  					.attr("cx", 245)
+  					.attr("cy", h - 35)
+  					.attr("r", 8)
+  					.attr("fill","yellow");
+
+  	var sleeve_left = dog.append("rect")
+  					.attr("x",231)
+  					.attr("y",h-95)
+  					.attr("width",20)
+  					.attr("height",55)
+  					.attr("fill","lightblue");
+
+  	var sleeve_right = dog.append("rect")
+  					.attr("x",269)
+  					.attr("y",h-99)
+  					.attr("width",1)
+  					.attr("height",55)
+  					.attr("fill","lightblue");
+
+  	var button = dog.append("circle")
+    			  .attr("cx",260)
+    			  .attr("cy", h-70)
+    			  .attr("r",3)
+    			  .attr("fill","black");
+
+  	var button = dog.append("circle")
+    			  .attr("cx",260)
+    			  .attr("cy", h-55)
+    			  .attr("r",3)
+    			  .attr("fill","black");
+
+
+
+  	//circleBounce();
+  					
+
+  	function circleBounce() {
+  		console.log("runningCircleBounce");
+
+  		dog.transition()
+  			  .ease("in")
+			  .duration(350)
+			  .attr("cy", h - 110)
+			  .transition()
+			  //.duration(250)
+			  //.delay(10)
+			  .attr("cy", h - 120)  
+			  .each("end", circleBounce);
+  		}
+
+
+
+  </script>
+
+<!--<input type="button" onClick="stop=!stop;circleBounce(); if (stop) this.value='Start'; else this.value='Stop';return false" VALUE="Start">-->
+  <h1>This is a Heading</h1>
+  <p>This is a paragraph.</p>
+
+</body>
+
+</html>
