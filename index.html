@@ -15,7 +15,7 @@
     }
 
     rect.fence {
-    	-webkit-animation: fencewalk 5s linear 5s;
+    	-webkit-animation: fencewalk 5s linear;
     	-webkit-animation-delay: 5s;
     }
 
@@ -44,19 +44,21 @@
 
     g.dog_container {
 
-    	-webkit-animation: walkin 5s linear 10s, walkout 5s linear 10s;
-    	-webkit-animation-delay: 0s, 10s;
+    	-webkit-animation: walk_in_from_left 5s linear,
+    					   walk_out_from_left 5s linear,
+    					   walk_out_from_left 5s linear reverse,
+    					   walk_in_from_left 5s linear reverse;
+    					   
+    	-webkit-animation-delay: 0s, 10s, 20s,30s;
     } 
 
-    @-webkit-keyframes walkin {
+    @-webkit-keyframes walk_in_from_left {
     	from {transform:translate(-275px,0px);}
-    	/*50% {transform:translateY(10px);}*/
     	to { transform:translate(0px,0px);}
     }
 
-    @-webkit-keyframes walkout {
+    @-webkit-keyframes walk_out_from_left {
     	from {transform:translate(0px,0px);}
-    	/*50% {transform:translateY(10px);}*/
     	to { transform:translate(275px,0px);}
     }
 
@@ -78,8 +80,6 @@
   				.append("svg")
   				.attr("width", w)
   				.attr("height", h);
-
-
 
   	var rectangles = svg.selectAll("rect")
 					   .data(dataset)
