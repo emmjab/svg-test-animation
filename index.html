@@ -149,6 +149,20 @@
   	var flower3 = create_flower_2(120, 350);
   	var flower4 = create_flower_2(675, 275);
 
+  	// fake ending for now
+
+  	var fake_ending = test_svg.append("text")
+  							  .attr("x", 200)
+  							  .attr("y", 200)
+  							  .attr("fill", "black")
+  							  .attr("font-family", "arial,sans-serif")
+  							  .attr("font-size", 36)
+  							  .text("THE END.");
+
+
+  	var staring_dog = create_dog_looking_through_fence();
+
+
     function create_flower_1(x_pos, y_pos) {
 
 	    var flower_1_container = test_svg.append("g")
@@ -343,6 +357,108 @@
 	    			  .attr("fill","black");
 
 	    return dog_container;
+
+    }
+
+    function create_dog_looking_through_fence() {
+
+
+		var dog = test_svg.append("g")
+					 .attr("class", "staring_dog")
+					 .attr("transform", "translate("+w/2+",0)");
+					 //.attr("transform"), "scale("+direction+",1)");
+						   
+
+	  	var head = dog.append("circle")
+	  					.attr("cx", 250-250)
+	  					.attr("cy", h - 120)
+	  					.attr("r", 20)
+	  					.attr("fill","yellow");
+
+	  	var ear = dog.append("ellipse")
+	  				 .attr("cx", 230-250)
+	  				 .attr("cy", h-115)
+	  				 .attr("rx", 8)
+	  				 .attr("ry", 12)
+	  				 .attr("fill", "orange");
+
+	  	var ear = dog.append("ellipse")
+	  				 .attr("cx", 270-250)
+	  				 .attr("cy", h-115)
+	  				 .attr("rx", 8)
+	  				 .attr("ry", 12)
+	  				 .attr("fill", "orange");
+
+	  	var body = dog.append("rect")
+	  				  .attr("x",230-250)
+	  				  .attr("y",h-100)
+	  				  .attr("width",40)
+	  				  .attr("height",100)
+	  				  .attr("fill","darkblue");
+
+	    var briefcase_container = dog.append("g")
+	    							 .attr("class", "briefcase")
+	    							 .attr("transform", "translate(-30,0)");
+
+	    var briefcase_handle = briefcase_container.append("rect")
+	  					   .attr("x",235-250)
+	  					   .attr("y",h-35)
+	  					   .attr("width",25)
+	  					   .attr("height",4)
+	  					   .attr("fill","brown");
+
+	  	var briefcase_handle_left = briefcase_container.append("rect")
+	  					   .attr("x",235-250)
+	  					   .attr("y",h-35)
+	  					   .attr("width",4)
+	  					   .attr("height",10)
+	  					   .attr("fill","brown");
+
+	  	var briefcase_handle_right = briefcase_container.append("rect")
+	  					   .attr("x",258-250)
+	  					   .attr("y",h-35)
+	  					   .attr("width",4)
+	  					   .attr("height",10)
+	  					   .attr("fill","brown");
+
+	    var briefcase = briefcase_container.append("rect")
+	  					   .attr("x",225-250)
+	  					   .attr("y",h-25)
+	  					   .attr("width",45)
+	  					   .attr("height",23)
+	  					   .attr("fill","brown");
+
+	  	var lefthand = dog.append("circle")
+	  					.attr("cx", 220-250)
+	  					.attr("cy", h - 38)
+	  					.attr("r", 8)
+	  					.attr("fill","yellow");
+
+	  	var sleeve_left = dog.append("rect")
+	  					.attr("x",220-250)
+	  					.attr("y",h-95)
+	  					.attr("width",15)
+	  					.attr("height",55)
+	  					.attr("transform", "rotate(10 0 400)")
+	  					.attr("fill","lightblue");
+
+
+	  	var sleeve_left = dog.append("rect")
+	  					.attr("x",220-250)
+	  					.attr("y",h-95)
+	  					.attr("width",15)
+	  					.attr("height",55)
+	  					.attr("transform", "rotate(20 150 550)")
+	  					.attr("fill","lightblue");
+
+	    var righthand = dog.append("circle")
+	  					.attr("cx", 300-250)
+	  					.attr("cy", h - 150)
+	  					.attr("r", 8)
+	  					.attr("fill","yellow");
+
+	    return dog;
+
 
     }
 
