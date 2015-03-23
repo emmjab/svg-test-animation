@@ -117,11 +117,112 @@
 
   	var my_dog = create_dog(1);
 
+  	//currently working on: field where grass is greener
+  	var test_svg = d3.select("body")
+  					 .append("svg")
+  					 .attr("width",w)
+  					 .attr("height",h);
+
+    var sky = test_svg.append("rect")
+    				  .attr("x", 0)
+    				  .attr("y", 0)
+    				  .attr("width", "100%")
+    				  .attr("height", "100%")
+    				  .attr("fill", "lightblue");
+
+  	var field1 = test_svg.append("ellipse")
+  						.attr("cx", w/3)
+  						.attr("cy", h)
+  						.attr("rx", w/2+100)
+  						.attr("ry", h/2)
+  						.attr("fill", "#55AE3A");
+
+  	var field2 = test_svg.append("ellipse")
+  						 .attr("cx", w - w/6)
+  						 .attr("cy", h+50)
+  						 .attr("rx", w/2+150)
+  						 .attr("ry", h/2)
+  						 .attr("fill", "#4DBD33");
+
+  	var flower1 = create_flower_1(250, 275);
+  	var flower2 = create_flower_1(500, 350);
+  	var flower3 = create_flower_2(120, 350);
+  	var flower4 = create_flower_2(675, 275);
+
+    function create_flower_1(x_pos, y_pos) {
+
+	    var flower_1_container = test_svg.append("g")
+	    								 .attr("class", "flower_1_container")
+	    								 .attr("transform", "translate("+x_pos+","+y_pos+")");
+
+	   	var stem = flower_1_container.append("rect")
+	   								 .attr("x", 0)
+	   								 .attr("y", 2)
+	   								 .attr("width", 2)
+	   								 .attr("height", 30)
+	   								 .attr("fill", "green");
+
+	    var petals = flower_1_container.append("circle")
+	    							   .attr("cx", 0)
+	    							   .attr("cy", 0)
+	    							   .attr("r", 10)
+	    							   .attr("fill", "orange");
+
+	    var flower_center = flower_1_container.append("circle")
+	    									  .attr("cx", 0)
+	    									  .attr("cy", 0)
+	    									  .attr("r", 5)
+	    									  .attr("fill", "yellow");
+
+	    return flower_1_container;
+    }
+
+
+
+    function create_flower_2(x_pos, y_pos) {
+
+	    var flower_2_container = test_svg.append("g")
+	    								 .attr("class", "flower_2_container")
+	    								 .attr("transform", "translate("+x_pos+","+y_pos+")");
+
+	   	var stem = flower_2_container.append("rect")
+	   								 .attr("x", 0)
+	   								 .attr("y", 2)
+	   								 .attr("width", 2)
+	   								 .attr("height", 30)
+	   								 .attr("fill", "green");
+
+
+
+	    var flower_bulb = flower_2_container.append("ellipse")
+	    									  .attr("cx", 0)
+	    									  .attr("cy", 0)
+	    									  .attr("rx", 5)
+	    									  .attr("ry", 7)
+	    									  .attr("fill", "purple");
+
+	    var petals = flower_2_container.append("polygon")
+	    							   .attr("points", "-4,-4 -2,-10 0,-4 2,-10 4,-4")
+	    							   .attr("fill", "purple");
+
+	    var leaf = flower_2_container.append("polygon")
+	    							 .attr("points", "0,12 8,18 0,24")
+	    							 .attr("fill", "green");
+
+	    return flower_2_container;
+    }
+
+
+
+
+
+
+
+  	// first created dog; direction is currently useless
   	function create_dog(direction) {
 
 	    var dog_container = svg.append("g")
-	    					   .attr("class", "dog_container")
-	    					   .attr("transform", "scale(2,2)");
+	    					   .attr("class", "dog_container");
 
 		var dog = dog_container.append("g")
 					 .attr("class", "dog");
