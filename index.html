@@ -84,7 +84,7 @@
 
   	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
-  	
+  	///////////////////////////////////////////////// START MAIN SVG **************************************
   	var svg = d3.select("body")
   				.append("svg")
   				.attr("width", w)
@@ -118,6 +118,9 @@
   						 .attr("fill","black");
 
   	var my_dog = create_dog(1);
+  	/////////////////////////////////////////////// END MAIN SVG **************************************
+
+  	/////////////////////////////////////////////// START TEST SVG **************************************
 
   	//paused: field where grass is greener
   	var test_svg = d3.select("body")
@@ -164,7 +167,105 @@
 
   	var staring_dog = create_dog_looking_through_fence();
 
+	/////////////////////////////////////////////// END TEST SVG **************************************
 
+	/////////////////////////////////////////////// START SEASONS SVG *********************************
+	var seasons_svg = d3.select("body")
+						.append("svg")
+						.attr("width",w)
+						.attr("height",h)
+
+
+
+  	var winter = seasons_svg.append("g")
+  							.attr("class", "winter");
+
+	// fence stuff
+	var rectangles = seasons_svg.selectAll("class", "fence")
+					   .data(dataset)
+					   .enter()
+					   .append("rect")
+					   //.attr("class","fence")
+					   .attr("x", function(d, i) {
+						    return i * 35;  //Bar width of 20 plus 1 for padding
+						})
+					   .attr("y", 75)
+					   .attr("width", 30)
+					   .attr("height", h - 75)
+					   .attr("fill","silver");
+
+	var fence_frame_top = seasons_svg.append("rect")
+  						 .attr("x",0)
+  						 .attr("y",100)
+  						 .attr("width",w)
+  						 .attr("height",5)
+  						 .attr("fill","black");
+
+  	var fence_frame_bottom = seasons_svg.append("rect")
+  						 .attr("x",0)
+  						 .attr("y",h-20)
+  						 .attr("width",w)
+  						 .attr("height",5)
+  						 .attr("fill","black");
+  	// end fence stuff
+
+
+  	var winter_sky = winter.append("rect")
+  						   .attr("x", 0)
+  						   .attr("y", 0)
+  						   .attr("width", w)
+  						   .attr("height", h)
+  						   .attr("fill", "AliceBlue");
+
+    var snow_test = [10,5,   20, 15, 12, 3,    17,6,  2,  10,7,  11,8,   13, 5];
+
+  	var snowball_data = { x: [30,120,150,200,275,300,330,400,480,500,520,590,660,730,770],
+  						  y: [40,480-40,400,100,200,480-100,70,400,270,40,190,80,480-10,300,270],
+  						  r: [10,5,   20, 15, 12, 3,    17,6,  2,  10,7,  11,8,   13, 5]};
+					   // ^should probably use math.random in a range on all of these.
+  					   // animated falling at different rates, in loop.
+
+    var all_snow = create_snow();
+
+  	var rectangles = svg.selectAll("rect")
+					   .data(dataset)
+					   .enter()
+					   .append("rect")
+					   .attr("class","fence")
+					   .attr("x", function(d, i) {
+						    return i * 35;  //Bar width of 20 plus 1 for padding
+						})
+					   .attr("y", 75)
+					   .attr("width", 30)
+					   .attr("height", h - 75)
+					   .attr("fill","silver");
+
+  	function create_snow() {
+  		var all_snow = seasons_svg.selectAll("circle")
+							 //.data(snowball_data)
+							 .data(snow_test)
+							 .enter()
+							 .append("circle")
+							 .attr("cx", function(d,i) {
+							 	return snowball_data['x'][i];
+
+							 })
+							 .attr("cy", function(d,i){
+							 	return snowball_data['y'][i];
+
+							 })
+							 .attr("r", function(d,i){
+							 	return snowball_data['r'][i];
+							 })
+							 .attr("fill", "white");
+
+  		return all_snow;
+
+  	}
+
+
+
+	/////////////////////////////////////////////// END SEASONS SVG ***********************************
 
 
 
