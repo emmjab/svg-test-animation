@@ -1,0 +1,4 @@
+indentation was crazy:
+
+    npm install js-beautify -g
+    js-beatify -s objects.js
