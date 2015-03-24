@@ -124,7 +124,7 @@
   	var w = 854;
   	var h = 480;
 
-  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   	///////////////////////////////////////////////// START MAIN SVG **************************************
   	var svg = d3.select("body")
@@ -138,11 +138,18 @@
 					   .append("rect")
 					   .attr("class","fence")
 					   .attr("x", function(d, i) {
-						    return i * 35;  //Bar width of 20 plus 1 for padding
+
+						    return i * 29;  //Bar width of 20 plus 1 for padding
 						})
 					   .attr("y", 75)
-					   .attr("width", 30)
-					   .attr("height", h - 75)
+					   .attr("width", 25)
+					   .attr("height", function(d, i) {
+
+					   		if (d == 0) {
+					   			return h - 220;
+					   		}
+					   		return h - 75;
+					   	})
 					   .attr("fill","silver");
 
 	var fence_frame_top = svg.append("rect")
@@ -275,13 +282,6 @@
 
     var all_snow = create_snow();
     var all_leaves = create_leaves();
-
-  	
-
-  	
-  					   
-
-
 
 	/////////////////////////////////////////////// END SEASONS SVG ***********************************
 
