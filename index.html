@@ -111,6 +111,18 @@
     	to {transform: translate(0px, 250px) rotate(-20deg);}
     }
 
+    .rain>rect {
+
+    	-webkit-animation: rainfall 10s linear infinite;
+    	-webkit-animation-delay:0s;
+    }
+
+    @-webkit-keyframes rainfall {
+
+    	from {transform: translate(0px, 0px);}
+    	to {transform:translate(0px,480px);}
+    }
+
     </style>
 
 
@@ -284,22 +296,33 @@
 					   // ^should probably use math.random in a range on all of these.
   					   // animated falling at different rates, in loop.
 
-    var all_snow = create_snow();
-    var all_leaves = create_leaves();
+    //var all_snow = create_snow();
+    //var all_leaves = create_leaves();
 
 
     var rain = seasons_svg.append("g")
     					  .attr("class", "rain");
 
     //create an array of integers where the length corresponds to the number of rain particles
-    var test_rain =[], len=30; while (test_rain[--len] = len);
+    var test_rain =[], len=700; while (test_rain[--len] = len);
     var rain_drops = rain.selectAll("class", "rain")
     				   .data(test_rain)
     				   .enter()
     				   .append("rect")
     				   .attr({
-    				   		x : function(min, max) { return Math.floor(Math.random() * w);},
-    				   		y : function(min, max) { return Math.floor(Math.random() * h);},
+    				   		x : function(d, i) { 
+    				   			
+    				   			return Math.floor(Math.random() * w);
+    				   			
+    				   		},
+    				   		y : function(d, i) { 
+    				   			if (i < 300){
+    				   				return Math.floor(Math.random() * h);
+    				   			} else {
+    				   				//return (Math.floor(Math.random() * (h + h)) - h);
+    				   				return (-Math.floor(Math.random() * h));
+    				   			}
+    				   		},
     				   		width: 3,
     				   		height: function(min, max) { return Math.floor(Math.random() * (20 - 10)) + 10;},
     				   		fill: "#6699CC"
