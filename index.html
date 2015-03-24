@@ -124,7 +124,7 @@
   	var w = 854;
   	var h = 480;
 
-  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  	var dataset = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   	///////////////////////////////////////////////// START MAIN SVG **************************************
   	var svg = d3.select("body")
@@ -152,19 +152,23 @@
 					   	})
 					   .attr("fill","silver");
 
-	var fence_frame_top = svg.append("rect")
-  						 .attr("x",0)
-  						 .attr("y",100)
-  						 .attr("width",w)
-  						 .attr("height",5)
-  						 .attr("fill","black");
+  	var fence_frame_top = svg.append("rect")
+  							 .attr({
+  							 	x: 0,
+  							 	y: 100,
+  							 	width: w,
+  							 	height: 5,
+  							 	fill: "black"
+  							 });
 
   	var fence_frame_bottom = svg.append("rect")
-  						 .attr("x",0)
-  						 .attr("y",h-20)
-  						 .attr("width",w)
-  						 .attr("height",5)
-  						 .attr("fill","black");
+  								.attr({
+  									x: 0,
+  									y: h-20,
+  									width: w,
+  									height: 5,
+  									fill: "black"
+  								})
 
   	var my_dog = create_dog(1);
   	/////////////////////////////////////////////// END MAIN SVG **************************************
@@ -282,6 +286,24 @@
 
     var all_snow = create_snow();
     var all_leaves = create_leaves();
+
+
+    var rain = seasons_svg.append("g")
+    					  .attr("class", "rain");
+
+    //create an array of integers where the length corresponds to the number of rain particles
+    var test_rain =[], len=30; while (test_rain[--len] = len);
+    var rain_drops = rain.selectAll("class", "rain")
+    				   .data(test_rain)
+    				   .enter()
+    				   .append("rect")
+    				   .attr({
+    				   		x : function(min, max) { return Math.floor(Math.random() * w);},
+    				   		y : function(min, max) { return Math.floor(Math.random() * h);},
+    				   		width: 3,
+    				   		height: function(min, max) { return Math.floor(Math.random() * (20 - 10)) + 10;},
+    				   		fill: "#6699CC"
+    				   });
 
 	/////////////////////////////////////////////// END SEASONS SVG ***********************************
 
