@@ -69,7 +69,7 @@
     	to { transform:translate(854px,0px);}
     }
 
-    circle.snow {
+    circle.snow, .leaf {
 
 
     	-webkit-animation: snowfall 10s linear infinite;
@@ -246,6 +246,7 @@
   					   // animated falling at different rates, in loop.
 
     var all_snow = create_snow();
+    var all_leaves = create_leaves();
 
   	function create_snow() {
   		var all_snow = seasons_svg.selectAll("class", "snow")
@@ -275,7 +276,51 @@
   	function create_leaves() {
 
 
-  		//this is going to be very similar to the snow
+		//this is going to be very similar to the snow
+		var leaves = seasons_svg.append("g")
+								.attr("class", "leaf")
+
+  		var all_leaves = leaves.selectAll("ellipse")
+				 //.data(snowball_data)
+				 .data(snow_test)
+				 .enter()
+				 .append("ellipse")
+				 .attr("class", "leaf")
+				 .attr("cx", function(d,i) {
+				 	return snowball_data['x'][i];
+
+				 })
+				 .attr("cy", function(d,i){
+				 	return snowball_data['y'][i];
+
+				 })
+				 .attr("rx", function(d,i){
+				 	return snowball_data['r'][i]/2;
+				 })
+				 .attr("ry", function(d,i){
+				 	return snowball_data['r'][i];
+				 })
+				 .attr("fill", "green");
+
+
+		var leaf_stems = leaves.selectAll("rect")
+							   .data(snow_test)
+							   .enter()
+							   .append("rect")
+							   .attr("x", function(d,i){
+							   		return snowball_data['x'][i];
+							   })
+							   .attr("y", function(d,i){
+							   		return snowball_data['y'][i];
+							   })
+							   .attr("width", function(d,i){
+							   		return snowball_data['r'][i];
+							   })
+							   .attr("height", function(d,i){
+							   		return 10;
+							   })
+
+		return leaves;
 
 
   	}
