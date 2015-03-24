@@ -69,7 +69,7 @@
     	to { transform:translate(854px,0px);}
     }
 
-    circle.snow, .leaf {
+    circle.snow  {
 
 
     	-webkit-animation: snowfall 10s linear infinite;
@@ -81,6 +81,34 @@
 
     	from {transform: translate(0px,0px);}
     	to {transform: translate(0px, 200px);}
+    }
+
+    .green_leaf {
+
+		-webkit-animation: leaffall 10s linear infinite;
+    	-webkit-animation-delay:0s;
+
+    }
+
+    @-webkit-keyframes leaffall {
+
+    	from {transform: translate(0px, 0px) rotate(0deg);}
+    	50% {transform: translate(0px, 50px) rotate(30deg);}
+    	to {transform: translate(0px, 250px) rotate(20deg);}
+    }
+
+    .orange_leaf {
+
+		-webkit-animation: leftleaffall 3s linear infinite;
+    	-webkit-animation-delay:0s;
+
+    }
+
+    @-webkit-keyframes leftleaffall {
+
+    	from {transform: translate(0px, 0px) rotate(0deg);}
+    	50% {transform: translate(0px, 50px) rotate(-20deg);}
+    	to {transform: translate(0px, 250px) rotate(-20deg);}
     }
 
     </style>
@@ -280,12 +308,12 @@
 		var leaves = seasons_svg.append("g")
 								.attr("class", "leaf")
 
-  		var all_leaves = leaves.selectAll("ellipse")
+  		var green_leaves = leaves.selectAll("class", "green_leaf")
 				 //.data(snowball_data)
 				 .data(snow_test)
 				 .enter()
 				 .append("ellipse")
-				 .attr("class", "leaf")
+				 .attr("class", "green_leaf")
 				 .attr("cx", function(d,i) {
 				 	return snowball_data['x'][i];
 
@@ -302,8 +330,30 @@
 				 })
 				 .attr("fill", "green");
 
+		var orange_leaves = leaves.selectAll("class", "orange_leaf")
+				 //.data(snowball_data)
+				 .data(snow_test)
+				 .enter()
+				 .append("ellipse")
+				 .attr("class", "orange_leaf")
+				 .attr("cx", function(d,i) {
+				 	return snowball_data['x'][i];
 
-		var leaf_stems = leaves.selectAll("rect")
+				 })
+				 .attr("cy", function(d,i){
+				 	return snowball_data['y'][i];
+
+				 })
+				 .attr("rx", function(d,i){
+				 	return snowball_data['r'][i]/2;
+				 })
+				 .attr("ry", function(d,i){
+				 	return snowball_data['r'][i];
+				 })
+				 .attr("fill", "orange");
+
+
+		/*var leaf_stems = leaves.selectAll("rect")
 							   .data(snow_test)
 							   .enter()
 							   .append("rect")
@@ -318,7 +368,7 @@
 							   })
 							   .attr("height", function(d,i){
 							   		return 10;
-							   })
+							   })*/
 
 		return leaves;
 
