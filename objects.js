@@ -293,3 +293,102 @@
 
 
     }
+
+    function create_snow() {
+  		var all_snow = seasons_svg.selectAll("class", "snow")
+							 //.data(snowball_data)
+							 .data(snow_test)
+							 .enter()
+							 .append("circle")
+							 .attr("class", "snow")
+							 .attr("cx", function(d,i) {
+							 	return snowball_data['x'][i];
+
+							 })
+							 .attr("cy", function(d,i){
+							 	return snowball_data['y'][i];
+
+							 })
+							 .attr("r", function(d,i){
+							 	return snowball_data['r'][i];
+							 })
+							 .attr("fill", "white");
+
+  		return all_snow;
+
+  	}
+
+
+  	function create_leaves() {
+
+
+		//this is going to be very similar to the snow
+		var leaves = seasons_svg.append("g")
+								.attr("class", "leaf")
+
+  		var green_leaves = leaves.selectAll("class", "green_leaf")
+				 //.data(snowball_data)
+				 .data(snow_test)
+				 .enter()
+				 .append("ellipse")
+				 .attr("class", "green_leaf")
+				 .attr("cx", function(d,i) {
+				 	return snowball_data['x'][i];
+
+				 })
+				 .attr("cy", function(d,i){
+				 	return snowball_data['y'][i];
+
+				 })
+				 .attr("rx", function(d,i){
+				 	return snowball_data['r'][i]/2;
+				 })
+				 .attr("ry", function(d,i){
+				 	return snowball_data['r'][i];
+				 })
+				 .attr("fill", "green");
+
+		var orange_leaves = leaves.selectAll("class", "orange_leaf")
+				 //.data(snowball_data)
+				 .data(snow_test)
+				 .enter()
+				 .append("ellipse")
+				 .attr("class", "orange_leaf")
+				 .attr("cx", function(d,i) {
+				 	return snowball_data['x'][i];
+
+				 })
+				 .attr("cy", function(d,i){
+				 	return snowball_data['y'][i];
+
+				 })
+				 .attr("rx", function(d,i){
+				 	return snowball_data['r'][i]/2;
+				 })
+				 .attr("ry", function(d,i){
+				 	return snowball_data['r'][i];
+				 })
+				 .attr("fill", "orange");
+
+
+		/*var leaf_stems = leaves.selectAll("rect")
+							   .data(snow_test)
+							   .enter()
+							   .append("rect")
+							   .attr("x", function(d,i){
+							   		return snowball_data['x'][i];
+							   })
+							   .attr("y", function(d,i){
+							   		return snowball_data['y'][i];
+							   })
+							   .attr("width", function(d,i){
+							   		return snowball_data['r'][i];
+							   })
+							   .attr("height", function(d,i){
+							   		return 10;
+							   })*/
+
+		return leaves;
+
+
+  	}
