@@ -192,10 +192,10 @@
 
 
     //this is dog facing the fence
-    function create_dog_looking_through_fence() {
+    function create_dog_looking_through_fence(which_svg) {
 
 
-		var dog = test_svg.append("g")
+		var dog = which_svg.append("g")
 					 .attr("class", "staring_dog")
 					 .attr("transform", "translate("+w/2+",0)");
 					 //.attr("transform"), "scale("+direction+",1)");

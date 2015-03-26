@@ -15,8 +15,103 @@
 
     }
 
-    /* SCENE I: FIRST ATTEMPT; commenting out for trying to animate as I go. */
+    rect.fence {
+    	-webkit-animation: fencewalk 5s 5s linear;
+    }
 
+    @-webkit-keyframes fencewalk {
+    	from {fill :darkgray; transform: translateX(0px);}
+    	to {fill: darkgray; transform: translateX(-530px);}
+    }
+
+    .fenceparts {
+    	-webkit-animation: fadeout .5s 12s forwards,
+    					   fadein .5s 14s forwards;;
+
+    }
+
+    .grass_is_greener {
+
+    	-webkit-animation: become_greener .5s 12s forwards,
+    					   become_less_green .5s 14s forwards;
+    }
+    
+    @-webkit-keyframes become_greener {
+    	from {opacity:.6;}
+    	to {opacity:1;}
+    }
+    @-webkit-keyframes become_less_green {
+    	from {opacity:1;}
+    	to {opacity:.6;}
+    }
+
+
+    g.dog {
+    	-webkit-animation: bounce 0.5s 0s 20, 
+    					   fadeout .5s 10s,
+    					   fadein 1s 16s forwards;
+
+    	/*-webkit-animation: fadeout 1s 3s forwards;*/
+    }
+
+    @-webkit-keyframes bounce {
+    	from {transform:translateY(0px);}
+    	50% {transform:translateY(10px);}
+    	to {transform:translateY(0px);}
+    }
+
+    @-webkit-keyframes bounceback {
+    	from {transform:translateY(0px) scale(-1,1);}
+    	50% {transform:translateY(10px) scale(-1,1);}
+    	to {transform:translateY(0px) scale(-1,1);}
+    }
+
+
+@-webkit-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+    g.dog_container {
+
+    	-webkit-animation: walk_in_from_left 5s 0s linear, 
+    					   fadeout .5s 10s linear forwards,
+    					   fadein .5s 16s linear forwards;    
+    } 
+
+    @-webkit-keyframes walk_in_from_left {
+    	from {transform:translate(0px,0px);}
+    	to { transform:translate(427px,0px);}
+    }
+
+    @-webkit-keyframes walk_out_from_left {
+    	from {transform:translate(427px,0px);}
+    	to { transform:translate(854px,0px);}
+    }
+
+    .staring_dog {
+    	opacity: 0;
+
+    	-webkit-animation: fadein .5s 10s forwards,
+    					   fadeout .5s 12s forwards,
+    					   fadein .5s 14s forwards;
+    }
+
+    /* SCENE I: FIRST ATTEMPT; commenting out for trying to animate as I go. */
+/*
     rect.fence {
     	-webkit-animation: fencewalk 5s linear, fencewalk 5s linear reverse;
     	-webkit-animation-delay: 5s, 25s;
@@ -70,6 +165,8 @@
     	from {transform:translate(427px,0px);}
     	to { transform:translate(854px,0px);}
     }
+
+    */
 
 
 	/* WEATHER */
@@ -297,7 +394,7 @@
 
 
 
-  	//var staring_dog = create_dog_looking_through_fence();
+  	var staring_dog = create_dog_looking_through_fence(svg);
 
 	/////////////////////////////////////////////// END GRASS_IS_GREENER SVG **************************************
 
