@@ -16,24 +16,35 @@
     }
 
     rect.fence {
-    	-webkit-animation: fencewalk 5s 5s linear;
+    	-webkit-animation: fencewalk 5s 5s linear forwards,
+    					   fencewalkhome 5s 38s linear forwards;
     }
 
     @-webkit-keyframes fencewalk {
-    	from {fill :darkgray; transform: translateX(0px);}
-    	to {fill: darkgray; transform: translateX(-530px);}
+    	from {transform: translateX(0px);}
+    	to {transform: translateX(-530px);}
+    }
+
+    @-webkit-keyframes fencewalkhome {
+    	from {transform: translateX(-530px);}
+    	to {transform: translateX(0px);}
     }
 
     .fenceparts {
     	-webkit-animation: fadeout .5s 12s forwards,
-    					   fadein .5s 14s forwards;;
+    					   fadein .5s 14s forwards,
+    					   fence_become_night 1s 24s forwards,
+    					   fadeout .5s 34s forwards,
+    					   fadein .5s 36s forwards;
 
     }
 
     .grass_is_greener {
 
     	-webkit-animation: become_greener .5s 12s forwards,
-    					   become_less_green .5s 14s forwards;
+    					   become_less_green .5s 14s forwards,
+    					   become_greener .5s 34s forwards,
+    					   become_less_green .5s 36s forwards; 
     }
     
     @-webkit-keyframes become_greener {
@@ -45,13 +56,59 @@
     	to {opacity:.6;}
     }
 
+    .grass_is_greener > rect {
+    	-webkit-animation: sky_become_night 1s 24s forwards,
+    					   sky_become_night 1s 50s reverse forwards; /* fix later */
+
+    }
+
+    @-webkit-keyframes sky_become_night {
+    	from { fill: lightblue;}
+    	to {fill: darkblue;}
+    }
+
+    @-webkit-keyframes fence_become_night {
+
+    	from { fill: darkgray;}
+    	to {fill: lightslategray;}
+
+    }
+
+    @-webkit-keyframes field1_become_night {
+
+    	from { fill: #55AE3A;}
+    	to {fill: #1c3813;}
+
+    }
+
+    @-webkit-keyframes field2_become_night {
+
+    	from { fill: #4DBD33;}
+    	to {fill: #1b4112;}
+
+    }
+
+    .field1 {
+    	-webkit-animation: field1_become_night 1s 24s forwards,
+    					   field1_become_night 1s 50s reverse forwards; /* fix later */
+
+    }
+
+    .field2 {
+    	-webkit-animation: field2_become_night 1s 24s forwards,
+    					   field2_become_night 1s 50s reverse forwards; /* fix later */
+
+    }
+
 
     g.dog {
     	-webkit-animation: bounce 0.5s 0s 20, 
     					   fadeout .5s 10s,
     					   fadein 1s 16s forwards,
     					   shrug .5s 17s 1,
-    					   bounce .5s 18s 10;
+    					   bounce .5s 18s 10,
+    					   bounceback 0.5s 26s 12,
+    					   bounceback .5s 38s 23;
 
     	/*-webkit-animation: fadeout 1s 3s forwards;*/
     }
@@ -99,7 +156,11 @@
     	-webkit-animation: walk_in_from_left 5s 0s linear, 
     					   fadeout .5s 10s linear forwards,
     					   fadein .5s 16s linear forwards,
-    					   walk_out_from_left 5s 18s linear forwards;    
+    					   walk_out_from_left 5s 18s linear,
+    					   walk_out_from_left 6s 26s linear reverse,
+    					   fadeout .5s 32s linear forwards,
+    					   fadein .5s 38s linear forwards,
+    					   walk_in_from_left 6s 43s linear reverse;    
     } 
 
     @-webkit-keyframes walk_in_from_left {
@@ -118,7 +179,11 @@
     	-webkit-animation: fadein .5s 10s forwards,
     					   fadeout .5s 12s forwards,
     					   fadein .5s 14s forwards,
-    					   fadeout .5s 16s forwards;
+    					   fadeout .5s 16s forwards,
+    					   fadein .5s 32s forwards,
+    					   fadeout .5s 34s forwards,
+    					   fadein .5s 36s forwards,
+    					   fadeout .5s 38s forwards;
     }
 
 	/* WEATHER */
@@ -233,7 +298,7 @@
 					   		}
 					   		return h - 75;
 					   	})
-					   .attr("fill","lightslategray");
+					   .attr("fill","darkgray");
 
   	var fence_frame_top = fenceparts.append("rect")
   							 .attr({
@@ -282,6 +347,7 @@
     				  .attr("fill", "lightblue");
 
   	var field1 = grass_is_greener.append("ellipse")
+  								 .attr("class", "field1")
   						.attr("cx", w/3)
   						.attr("cy", h)
   						.attr("rx", w/2+100)
@@ -289,6 +355,7 @@
   						.attr("fill", "#55AE3A");
 
   	var field2 = grass_is_greener.append("ellipse")
+  								 .attr("class", "field2")
   						 .attr("cx", w - w/6)
   						 .attr("cy", h+50)
   						 .attr("rx", w/2+150)
@@ -322,7 +389,7 @@
 					   		}
 					   		return h - 75;
 					   	})
-					   .attr("fill","lightslategray");
+					   .attr("fill","darkgray");
 
   	var fence_frame_top = fenceparts.append("rect")
   							 .attr({
@@ -362,7 +429,7 @@
   							.attr("class", "winter");
 
 	// fence stuff
-	var rectangles = seasons_svg.selectAll("class", "fence")
+/*	var rectangles = seasons_svg.selectAll("class", "fence")
 					   .data(dataset)
 					   .enter()
 					   .append("rect")
@@ -389,7 +456,7 @@
   						 .attr("height",5)
   						 .attr("fill","black");
   	// end fence stuff
-
+*/
 
   	var winter_sky = winter.append("rect")
   						   .attr("x", 0)
