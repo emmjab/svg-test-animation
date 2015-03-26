@@ -1,6 +1,6 @@
   	    function create_flower_1(x_pos, y_pos) {
 
-	    var flower_1_container = test_svg.append("g")
+	    var flower_1_container = grass_is_greener.append("g")
 	    								 .attr("class", "flower_1_container")
 	    								 .attr("transform", "translate("+x_pos+","+y_pos+")");
 
@@ -30,7 +30,7 @@
 
     function create_flower_2(x_pos, y_pos) {
 
-	    var flower_2_container = test_svg.append("g")
+	    var flower_2_container = grass_is_greener.append("g")
 	    								 .attr("class", "flower_2_container")
 	    								 .attr("transform", "translate("+x_pos+","+y_pos+")");
 
@@ -195,7 +195,7 @@
     function create_dog_looking_through_fence() {
 
 
-		var dog = test_svg.append("g")
+		var dog = grass_is_greener.append("g")
 					 .attr("class", "staring_dog")
 					 .attr("transform", "translate("+w/2+",0)");
 					 //.attr("transform"), "scale("+direction+",1)");
@@ -294,101 +294,5 @@
 
     }
 
-    function create_snow() {
-  		var all_snow = seasons_svg.selectAll("class", "snow")
-							 //.data(snowball_data)
-							 .data(snow_test)
-							 .enter()
-							 .append("circle")
-							 .attr("class", "snow")
-							 .attr("cx", function(d,i) {
-							 	return snowball_data['x'][i];
 
-							 })
-							 .attr("cy", function(d,i){
-							 	return snowball_data['y'][i];
-
-							 })
-							 .attr("r", function(d,i){
-							 	return snowball_data['r'][i];
-							 })
-							 .attr("fill", "white");
-
-  		return all_snow;
-
-  	}
-
-
-  	function create_leaves() {
-
-
-		//this is going to be very similar to the snow
-		var leaves = seasons_svg.append("g")
-								.attr("class", "leaf")
-
-  		var green_leaves = leaves.selectAll("class", "green_leaf")
-				 //.data(snowball_data)
-				 .data(snow_test)
-				 .enter()
-				 .append("ellipse")
-				 .attr("class", "green_leaf")
-				 .attr("cx", function(d,i) {
-				 	return snowball_data['x'][i];
-
-				 })
-				 .attr("cy", function(d,i){
-				 	return snowball_data['y'][i];
-
-				 })
-				 .attr("rx", function(d,i){
-				 	return snowball_data['r'][i]/2;
-				 })
-				 .attr("ry", function(d,i){
-				 	return snowball_data['r'][i];
-				 })
-				 .attr("fill", "green");
-
-		var orange_leaves = leaves.selectAll("class", "orange_leaf")
-				 //.data(snowball_data)
-				 .data(snow_test)
-				 .enter()
-				 .append("ellipse")
-				 .attr("class", "orange_leaf")
-				 .attr("cx", function(d,i) {
-				 	return snowball_data['x'][i];
-
-				 })
-				 .attr("cy", function(d,i){
-				 	return snowball_data['y'][i];
-
-				 })
-				 .attr("rx", function(d,i){
-				 	return snowball_data['r'][i]/2;
-				 })
-				 .attr("ry", function(d,i){
-				 	return snowball_data['r'][i];
-				 })
-				 .attr("fill", "orange");
-
-
-		/*var leaf_stems = leaves.selectAll("rect")
-							   .data(snow_test)
-							   .enter()
-							   .append("rect")
-							   .attr("x", function(d,i){
-							   		return snowball_data['x'][i];
-							   })
-							   .attr("y", function(d,i){
-							   		return snowball_data['y'][i];
-							   })
-							   .attr("width", function(d,i){
-							   		return snowball_data['r'][i];
-							   })
-							   .attr("height", function(d,i){
-							   		return 10;
-							   })*/
-
-		return leaves;
-
-
-  	}
+  	

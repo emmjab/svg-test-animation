@@ -69,59 +69,43 @@
     	to { transform:translate(854px,0px);}
     }
 
-    circle.snow  {
-
-
-    	-webkit-animation: snowfall 10s linear infinite;
-    	-webkit-animation-delay:0s;
-
-    }
-
-    @-webkit-keyframes snowfall {
-
-    	from {transform: translate(0px,0px);}
-    	to {transform: translate(0px, 200px);}
-    }
-
-    .green_leaf {
-
-		-webkit-animation: leaffall 10s linear infinite;
-    	-webkit-animation-delay:0s;
-
-    }
-
-    @-webkit-keyframes leaffall {
-
-    	from {transform: translate(0px, 0px) rotate(0deg);}
-    	50% {transform: translate(0px, 50px) rotate(30deg);}
-    	to {transform: translate(0px, 250px) rotate(20deg);}
-    }
-
-    .orange_leaf {
-
-		-webkit-animation: leftleaffall 3s linear infinite;
-    	-webkit-animation-delay:0s;
-
-    }
-
-    @-webkit-keyframes leftleaffall {
-
-    	from {transform: translate(0px, 0px) rotate(0deg);}
-    	50% {transform: translate(0px, 50px) rotate(-20deg);}
-    	to {transform: translate(0px, 250px) rotate(-20deg);}
-    }
-
     .rain>rect {
 
-    	-webkit-animation: rainfall 10s linear infinite;
+    	-webkit-animation: rainfall 5s linear infinite;
     	-webkit-animation-delay:0s;
     }
 
     @-webkit-keyframes rainfall {
 
     	from {transform: translate(0px, 0px);}
-    	to {transform:translate(0px,480px);}
+    	to {transform:translate(0px,1000px);}
     }
+
+    .snow>circle {
+
+    	-webkit-animation: snowfall 10s linear infinite;
+    	-webkit-animation-delay:0s;
+    }
+
+    @-webkit-keyframes snowfall {
+
+    	from {transform: translate(0px, 0px);}
+    	to {transform: translate(0px,480px);}
+    }
+
+    .leaf>ellipse {
+
+    	-webkit-animation: leafdrop 10s linear infinite;
+    	-webkit-animation-delay:0s;
+    }
+
+    @-webkit-keyframes leafdrop {
+
+    	from {transform: translate(0px, 0px) rotate(-30deg, 20, 90) scale(1,1);}
+    	50% {transform: translate(100px,240px) rotate(30deg, 50,50) scale(-1,1);}
+    	to {transform: translate(-100px,480px) rotate(-30deg, -20,-90) scale(1,1);}
+    }
+
 
     </style>
 
@@ -188,26 +172,28 @@
   	/////////////////////////////////////////////// START TEST SVG **************************************
 
   	//paused: field where grass is greener
-  	var test_svg = d3.select("body")
-  					 .append("svg")
-  					 .attr("width",w)
-  					 .attr("height",h);
+  	var grass_is_greener = d3.select("body")
+  							 .append("svg")
+  							 .attr({
+  							 	width: w,
+  							 	height: h
+  							 });
 
-    var sky = test_svg.append("rect")
+    var sky = grass_is_greener.append("rect")
     				  .attr("x", 0)
     				  .attr("y", 0)
     				  .attr("width", "100%")
     				  .attr("height", "100%")
     				  .attr("fill", "lightblue");
 
-  	var field1 = test_svg.append("ellipse")
+  	var field1 = grass_is_greener.append("ellipse")
   						.attr("cx", w/3)
   						.attr("cy", h)
   						.attr("rx", w/2+100)
   						.attr("ry", h/2)
   						.attr("fill", "#55AE3A");
 
-  	var field2 = test_svg.append("ellipse")
+  	var field2 = grass_is_greener.append("ellipse")
   						 .attr("cx", w - w/6)
   						 .attr("cy", h+50)
   						 .attr("rx", w/2+150)
@@ -220,7 +206,7 @@
   	var flower4 = create_flower_2(675, 275);
 
   	// start: fake ending for now
-  	var fake_ending = test_svg.append("text")
+  	var fake_ending = grass_is_greener.append("text")
   							  .attr("x", 200)
   							  .attr("y", 200)
   							  .attr("fill", "black")
@@ -282,31 +268,13 @@
   						   .attr("height", h)
   						   .attr("fill", "AliceBlue");
 
-    var snow_test = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-
-  	var snowball_data = { x: [30,120,150,200,275,300,330,400,480,500,520,590,660,730,770,
-  							  30,120,150,200,275,300,330,400,480,500,520,590,660,730,770,
-  							  30,120,150,200,275,300,330,400,480,500,520,590,660,730,770],
-  						  y: [40,440,400,100,200,380,70,400,270,40,190,80,470,300,270,
-  						      40-100,440-100,400-100,100-100,200-100,380-100,70-100,400-100,270-100,40-100,190-100,80-100,470-100,300-100,270-100,
-  						      40-200,440-200,400-200,100-200,200-200,380-200,70-200,400-200,270-200,40-200,190-200,80-200,470-200,300-200,270-200],
-  						  r: [10,5,   20, 15, 12, 3,    17,6,  2,  10,7,  11,8,   13, 5,
-  						      5,10,   3, 12, 20, 15,    6,17,  2,  7,10,  8,10,   5, 13,
-  						      12,3,   15, 3, 10, 6,    9,6,  4,  2,6,  15,11,   10, 4]};
-					   // ^should probably use math.random in a range on all of these.
-  					   // animated falling at different rates, in loop.
-
-    //var all_snow = create_snow();
-    //var all_leaves = create_leaves();
-
-
+    /// RAINNN
     var rain = seasons_svg.append("g")
     					  .attr("class", "rain");
-
     //create an array of integers where the length corresponds to the number of rain particles
-    var test_rain =[], len=700; while (test_rain[--len] = len);
+    var rain_place_holders =[], len=900; while (rain_place_holders[--len] = len);
     var rain_drops = rain.selectAll("class", "rain")
-    				   .data(test_rain)
+    				   .data(rain_place_holders)
     				   .enter()
     				   .append("rect")
     				   .attr({
@@ -318,14 +286,71 @@
     				   		y : function(d, i) { 
     				   			if (i < 300){
     				   				return Math.floor(Math.random() * h);
-    				   			} else {
+    				   			} else if (i >= 300 && i < 600) {
     				   				//return (Math.floor(Math.random() * (h + h)) - h);
     				   				return (-Math.floor(Math.random() * h));
+    				   			} else {
+    				   				return (-2*Math.floor(Math.random() * h));
     				   			}
     				   		},
     				   		width: 3,
     				   		height: function(min, max) { return Math.floor(Math.random() * (20 - 10)) + 10;},
     				   		fill: "#6699CC"
+    				   });
+
+    /// SNOWWWW
+    var snow = seasons_svg.append("g")
+    					  .attr("class", "snow");
+    //create an array of integers where the length corresponds to the number of rain particles
+    var snow_place_holders =[], len=200; while (snow_place_holders[--len] = len);
+    var snow_flakes = snow.selectAll("class", "snow")
+    				   .data(snow_place_holders)
+    				   .enter()
+    				   .append("circle")
+    				   .attr({
+    				   		cx : function(d, i) { 
+    				   			
+    				   			return Math.floor(Math.random() * w);
+    				   			
+    				   		},
+    				   		cy : function(d, i) { 
+    				   			if (i < 150){
+    				   				return Math.floor(Math.random() * h);
+    				   			} else {
+    				   				//return (Math.floor(Math.random() * (h + h)) - h);
+    				   				return (-Math.floor(Math.random() * h));
+    				   			}
+    				   		},
+    				   		r : function(min, max) { return Math.floor(Math.random() * (15 - 3)) + 3;},
+    				   		fill: "white"
+    				   });
+
+    /// LEAVES
+    var leaves = seasons_svg.append("g")
+    					  .attr("class", "leaf");
+    //create an array of integers where the length corresponds to the number of rain particles
+    var leaf_place_holders =[], len=150; while (snow_place_holders[--len] = len);
+    var dead_leaves = leaves.selectAll("class", "leaf")
+    				   .data(snow_place_holders)
+    				   .enter()
+    				   .append("ellipse")
+    				   .attr({
+    				   		cx : function(d, i) { 
+    				   			
+    				   			return Math.floor(Math.random() * w);
+    				   			
+    				   		},
+    				   		cy : function(d, i) { 
+    				   			if (i < 75){
+    				   				return Math.floor(Math.random() * h);
+    				   			} else {
+    				   				//return (Math.floor(Math.random() * (h + h)) - h);
+    				   				return (-Math.floor(Math.random() * h));
+    				   			}
+    				   		},
+    				   		rx : function(min, max) { return Math.floor(Math.random() * (6 - 3)) + 3;},
+    				   		ry : function(min, max) { return Math.floor(Math.random() * (15 - 7)) + 7;},
+    				   		fill: function(d,i) { return i%2 == 0 ? "green" : "orange";}
     				   });
 
 	/////////////////////////////////////////////// END SEASONS SVG ***********************************
