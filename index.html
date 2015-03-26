@@ -15,6 +15,8 @@
 
     }
 
+    /* SCENE I: FIRST ATTEMPT; commenting out for trying to animate as I go. */
+
     rect.fence {
     	-webkit-animation: fencewalk 5s linear, fencewalk 5s linear reverse;
     	-webkit-animation-delay: 5s, 25s;
@@ -22,8 +24,8 @@
 
     @-webkit-keyframes fencewalk {
 
-    	from {fill :silver; transform: translateX(0px);}
-    	to {fill: silver; transform: translateX(-530px);}
+    	from {fill :darkgray; transform: translateX(0px);}
+    	to {fill: darkgray; transform: translateX(-530px);}
     }
 
 
@@ -69,6 +71,8 @@
     	to { transform:translate(854px,0px);}
     }
 
+
+	/* WEATHER */
     .rain>rect {
 
     	-webkit-animation: rainfall 5s linear infinite;
@@ -105,7 +109,7 @@
     	50% {transform: translate(100px,240px) rotate(30deg, 50,50) scale(-1,1);}
     	to {transform: translate(-100px,480px) rotate(-30deg, -20,-90) scale(1,1);}
     }
-
+    /* END WEATHER */
 
     </style>
 
@@ -128,56 +132,9 @@
   				.attr("width", w)
   				.attr("height", h);
 
-  	var rectangles = svg.selectAll("rect")
-					   .data(dataset)
-					   .enter()
-					   .append("rect")
-					   .attr("class","fence")
-					   .attr("x", function(d, i) {
-
-						    return i * 29;  //Bar width of 20 plus 1 for padding
-						})
-					   .attr("y", 75)
-					   .attr("width", 25)
-					   .attr("height", function(d, i) {
-
-					   		if (d == 0) {
-					   			return h - 220;
-					   		}
-					   		return h - 75;
-					   	})
-					   .attr("fill","silver");
-
-  	var fence_frame_top = svg.append("rect")
-  							 .attr({
-  							 	x: 0,
-  							 	y: 100,
-  							 	width: w,
-  							 	height: 5,
-  							 	fill: "black"
-  							 });
-
-  	var fence_frame_bottom = svg.append("rect")
-  								.attr({
-  									x: 0,
-  									y: h-20,
-  									width: w,
-  									height: 5,
-  									fill: "black"
-  								})
-
-  	var my_dog = create_dog(1);
-  	/////////////////////////////////////////////// END MAIN SVG **************************************
-
-  	/////////////////////////////////////////////// START TEST SVG **************************************
-
-  	//paused: field where grass is greener
-  	var grass_is_greener = d3.select("body")
-  							 .append("svg")
-  							 .attr({
-  							 	width: w,
-  							 	height: h
-  							 });
+  	var grass_is_greener = svg.append("g")
+    							   .attr("class", "grass_is_greener")
+    							   .attr("opacity", ".6");
 
     var sky = grass_is_greener.append("rect")
     				  .attr("x", 0)
@@ -205,20 +162,144 @@
   	var flower3 = create_flower_2(120, 350);
   	var flower4 = create_flower_2(675, 275);
 
-  	// start: fake ending for now
-  	var fake_ending = grass_is_greener.append("text")
-  							  .attr("x", 200)
-  							  .attr("y", 200)
-  							  .attr("fill", "black")
-  							  .attr("font-family", "arial,sans-serif")
-  							  .attr("font-size", 36)
-  							  .text("THE END.");
-  	// end: just to show the words "the end"
+
+  	var fenceparts = svg.append("g")
+  						 .attr("class", "fenceparts");
+
+  	var rectangles = fenceparts.selectAll("rect")
+					   .data(dataset)
+					   .enter()
+					   .append("rect")
+					   .attr("class","fence")
+					   .attr("x", function(d, i) {
+
+						    return i * 29;  //Bar width of 20 plus 1 for padding
+						})
+					   .attr("y", 75)
+					   .attr("width", 25)
+					   .attr("height", function(d, i) {
+
+					   		if (d == 0) {
+					   			return h - 220;
+					   		}
+					   		return h - 75;
+					   	})
+					   .attr("fill","lightslategray");
+
+  	var fence_frame_top = fenceparts.append("rect")
+  							 .attr({
+  							 	x: 0,
+  							 	y: 100,
+  							 	width: w,
+  							 	height: 5,
+  							 	fill: "black"
+  							 });
+
+  	var fence_frame_bottom = fenceparts.append("rect")
+  								.attr({
+  									x: 0,
+  									y: h-20,
+  									width: w,
+  									height: 5,
+  									fill: "black"
+  								})
+
+  	var my_dog = create_dog(1);
 
 
-  	var staring_dog = create_dog_looking_through_fence();
+  	/* flyer falls from sky */
+  	//var flyer = svg.append("rect")
 
-	/////////////////////////////////////////////// END TEST SVG **************************************
+
+  	/////////////////////////////////////////////// END MAIN SVG **************************************
+
+  	/////////////////////////////////////////////// START TEST SVG **************************************
+
+  	//paused: field where grass is greener
+  	var svg = d3.select("body")
+  				.append("svg")
+  				.attr("width", w)
+  				.attr("height", h);
+
+  	var grass_is_greener = svg.append("g")
+    							   .attr("class", "grass_is_greener")
+    							   .attr("opacity", ".6");
+
+    var sky = grass_is_greener.append("rect")
+    				  .attr("x", 0)
+    				  .attr("y", 0)
+    				  .attr("width", "100%")
+    				  .attr("height", "100%")
+    				  .attr("fill", "lightblue");
+
+  	var field1 = grass_is_greener.append("ellipse")
+  						.attr("cx", w/3)
+  						.attr("cy", h)
+  						.attr("rx", w/2+100)
+  						.attr("ry", h/2)
+  						.attr("fill", "#55AE3A");
+
+  	var field2 = grass_is_greener.append("ellipse")
+  						 .attr("cx", w - w/6)
+  						 .attr("cy", h+50)
+  						 .attr("rx", w/2+150)
+  						 .attr("ry", h/2)
+  						 .attr("fill", "#4DBD33");
+
+  	var flower1 = create_flower_1(250, 275);
+  	var flower2 = create_flower_1(500, 350);
+  	var flower3 = create_flower_2(120, 350);
+  	var flower4 = create_flower_2(675, 275);
+
+
+  	var fenceparts = svg.append("g")
+  						 .attr("class", "fenceparts");
+
+  	var rectangles = fenceparts.selectAll("rect")
+					   .data(dataset)
+					   .enter()
+					   .append("rect")
+					   .attr("class","fence")
+					   .attr("x", function(d, i) {
+
+						    return i * 29;  //Bar width of 20 plus 1 for padding
+						})
+					   .attr("y", 75)
+					   .attr("width", 25)
+					   .attr("height", function(d, i) {
+
+					   		if (d == 0) {
+					   			return h - 220;
+					   		}
+					   		return h - 75;
+					   	})
+					   .attr("fill","lightslategray");
+
+  	var fence_frame_top = fenceparts.append("rect")
+  							 .attr({
+  							 	x: 0,
+  							 	y: 100,
+  							 	width: w,
+  							 	height: 5,
+  							 	fill: "black"
+  							 });
+
+  	var fence_frame_bottom = fenceparts.append("rect")
+  								.attr({
+  									x: 0,
+  									y: h-20,
+  									width: w,
+  									height: 5,
+  									fill: "black"
+  								})
+
+  	var my_dog = create_dog(1);
+
+
+
+  	//var staring_dog = create_dog_looking_through_fence();
+
+	/////////////////////////////////////////////// END GRASS_IS_GREENER SVG **************************************
 
 	/////////////////////////////////////////////// START SEASONS SVG *********************************
 	var seasons_svg = d3.select("body")

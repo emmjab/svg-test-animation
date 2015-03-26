@@ -195,7 +195,7 @@
     function create_dog_looking_through_fence() {
 
 
-		var dog = grass_is_greener.append("g")
+		var dog = test_svg.append("g")
 					 .attr("class", "staring_dog")
 					 .attr("transform", "translate("+w/2+",0)");
 					 //.attr("transform"), "scale("+direction+",1)");
